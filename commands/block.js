@@ -7,7 +7,6 @@ module.exports.run = async (bot, message, args) => {
     args.forEach((word) => {
       content += word + " "
     })
-    console.log(content);
     content.split('').forEach((letter) => {
       reply += emojis[letter.toUpperCase()]+' ';
     })
