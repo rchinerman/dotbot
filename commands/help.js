@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
       message.channel.send({embed: {
         color: 3447003,
         title: "Commands",
-        description: "Replace fields inside <brackets>",      
+        description: "\u200B",      
         fields: fields
       }});
     });
