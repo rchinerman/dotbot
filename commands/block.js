@@ -24,5 +24,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "block",
+  usage: "`block <text>",
   about: "Enter a combination of numbers and letters and have it emojified."
 }
