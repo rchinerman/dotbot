@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
       let jsfiles = files.filter(f => f.split(".").pop() === "js");  
       jsfiles.forEach((f) => {
         let props = require(`./${f}`);
-        message.channel.send(`\`${f.split('.')[0]}: ${props.help.about}`);
+        message.channel.send(`\`${props.help.name}: ${props.help.about}`);
       });
     });
   } catch(err){
