@@ -8,11 +8,12 @@ module.exports.run = async (bot, message, args) => {
       }
     ]})
     msg.delete();
-  } catch(e){
-    console.log(e.stack);
+  } catch(err){
+    console.log(err.stack);
   }
 };
 
 module.exports.help = {
-  name: "avatar"
+  name: "avatar",
+  about: "Posts the user's profile picture."
 }

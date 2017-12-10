@@ -19,7 +19,7 @@ fs.readdir("./commands/", (err, files) => {
 
   console.log(`Loading ${jsfiles.length} commands.`);
 
-  jsfiles.forEach((f, i) => {
+  jsfiles.forEach((f) => {
     let props = require(`./commands/${f}`);
     console.log(`${f} loaded.`);
     bot.commands.set(props.help.name, props);
@@ -36,7 +36,7 @@ bot.on("message", async message => {
 
   let messageArray = message.content.split(" ");
   let command = messageArray[0];
-  let args = messageArray.slice(1);
+  let args = messageArray;
 
   let cmd = bot.commands.get(command.slice(prefix.length));
   if(cmd) cmd.run(bot, message, args);
