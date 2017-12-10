@@ -13,6 +13,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "spam",
-  usage: "`spam",
+  usage: ".spam",
   about: "Spams jokes (currently disabled)"
 }

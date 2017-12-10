@@ -24,6 +24,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "help",
-  usage: "`help",
+  usage: ".help",
   about: "Prints out a short message describing each command."
 }
