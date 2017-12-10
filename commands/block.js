@@ -1,4 +1,4 @@
-const emojis = require("../resources/emoji.json")
+const emojis = require("../resources/emoji.json");
 
 module.exports.run = async (bot, message, args) => {
   try{
