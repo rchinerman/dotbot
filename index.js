@@ -27,7 +27,7 @@ fs.readdir("./commands/", (err, files) => {
 });
 
 bot.on("ready", async () => {
-  bot.user.setGame(".help to see commands");
+  bot.user.setGame(".help");
   console.log("I am ready!");
 });
 
