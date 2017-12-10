@@ -41,5 +41,5 @@ module.exports.run = async (bot, message, args) => {
 module.exports.help = {
   name: "poll",
   usage: ".poll \"Question\" \"Option 1\" \"Option 2\"",
-  about: "Prints out a short message describing each command."
+  about: "Creates a poll with up to nine options."
 }
