@@ -10,13 +10,17 @@ module.exports.run = async (bot, message, args) => {
   findKey = (object, key) => {
     return Object.keys(object).find(k => k.toLowerCase() === key.toLowerCase());
   };
-  try{
 
+  if(args.length === 0){
+    message.channel.send("Please supply a champion name after the '.champ' command.");
+    return;
+  }
+  try{
     let championEntered = args[0].replace(/[^A-Za-z]/g,'');
     let address = args.join(" ")
     let url = "http://api.champion.gg/v2/champions/";
     let elo = "SILVER";
-    let championKey = findKey(champKeys, championEntered) || '';
+    let championKey = findKey(champKeys, championEntered);
     let championId = champKeys[championKey].id;
     let limit = "1";
     let imgUrl = "http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/";
