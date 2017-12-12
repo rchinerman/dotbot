@@ -2,9 +2,10 @@ const emojis = require("../resources/emoji.json");
 
 module.exports.run = async (bot, message, args) => {
   try{
+    let text = message.content.match(/"[^"]+"/g);
     let validForms = true;
 
-    args.forEach((entry) => {
+    text.forEach((entry) => {
       if(!(entry.startsWith("\"") || !(entry.endsWith("\"")))){
         validForms = false;
         return;
@@ -16,8 +17,6 @@ module.exports.run = async (bot, message, args) => {
       "quotation marks \(\"\) individually");
       return;
     }
-
-    let text = message.content.match(/"[^"]+"/g);
     let noQuotes = text.map((entry) => {
       return entry.replace(/"/g,"");
     });
