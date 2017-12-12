@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
     let championEntered = args[0].replace(/[^A-Za-z]/g,'');
     let address = args.join(" ")
     let url = "http://api.champion.gg/v2/champions/";
-    let elo = "SILVER";
+    let elo = "";
     let championKey = findKey(champKeys, championEntered);
     let championId = champKeys[championKey].id;
     let limit = "1";
