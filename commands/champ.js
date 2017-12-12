@@ -19,24 +19,33 @@ module.exports.run = async (bot, message, args) => {
     let championEntered = args[0].replace(/[^A-Za-z]/g,'');
     let address = args.join(" ")
     let url = "http://api.champion.gg/v2/champions/";
-    let elo = "";
+    //let elo = "";
     let championKey = findKey(champKeys, championEntered);
+    //let sort = "playRate-desc";
     let championId = champKeys[championKey].id;
-    let limit = "1";
+    //let limit = "1";
     let imgUrl = "http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/";
 
-    fetch(`${url}${championId}?elo=${elo}&limit=${limit}&api_key=${CHAMPGG_KEY}`).then((res, err) => {
+    //fetch(`${url}${championId}?elo=${elo}&limit=${limit}&api_key=${CHAMPGG_KEY}`).then((res, err) => {
+    
+    fetch(`${url}${championId}?&api_key=${CHAMPGG_KEY}`).then((res, err) => {
       return res.json();
     }).then((res) => {
       const embed = new Discord.RichEmbed()
         .setDescription(`${champIds[championId].title}`)
-        .setAuthor(`${champIds[championId].name} - ${champRoles[res[0].role]}`)
+        .setAuthor(`${champIds[championId].name}`)
         .setThumbnail(`${imgUrl}${champIds[championId].key}.png`)
         .setColor(523423)
-        .addField("Win Rate", `${(res[0].winRate*100).toFixed(2)}%`, true)
-        .addField("Play Rate", `${(res[0].playRate*100).toFixed(2)}%`, true)
-        .addField("Games Played", `${res[0].gamesPlayed}`, true)
-        .addField("Ban Rate", `${(res[0].banRate*100).toFixed(2)}%`, true)
+        .setFooter(`Stats from Champion.gg | Patch ${res[0].patch} | Platinum+`)
+        res.forEach((role, i) => {
+          if(i>0){embed .addBlankField()}         
+            embed.addField("Role", `${champRoles[role.role]}`, true)
+                 .addField("Win Rate", `${(role.winRate*100).toFixed(2)}%`, true)
+                 .addField("Play Rate", `${(role.playRate*100).toFixed(2)}%`, true)
+                 .addField("Ban Rate", `${(role.banRate*100).toFixed(2)}%`, true)               
+                 .addField("Games Played", `${role.gamesPlayed}`, true)
+                 .addField("Role Popularity", `${(role.percentRolePlayed*100).toFixed(2)}%`, true)
+      })
         
       message.channel.send({embed: embed});
     })} catch(err){
