@@ -18,7 +18,12 @@ module.exports.run = async (bot, message, args) => {
             reply += emojis[letter.toUpperCase()]+' ';    
       }
     })
-    message.channel.send(`${reply}`);
+    if(reply.length > 0){
+      message.channel.send(`${reply}`)
+     } 
+    else{
+      message.channel.send("No valid characters entered. Please enter only letters, numbers, '!' and '?'.");
+     }
   } catch(err){
     console.log(err.stack);
   }
