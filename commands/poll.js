@@ -2,11 +2,18 @@ const emojis = require("../resources/emoji.json");
 
 module.exports.run = async (bot, message, args) => {
   try{
-    let text = message.content.match(/"[^"]+"/g);
-    let validForms = true;
+    let text = message.content.match(/\([^(]+\)/g);
 
+    if (text === null){
+      message.channel.send("Please ensure the question and each option are surrounded by " + 
+      "parentheses: \( and \)");
+      return;
+    }
+
+    let validForms = true;
+    
     text.forEach((entry) => {
-      if(!(entry.startsWith("\"") || !(entry.endsWith("\"")))){
+      if(!(entry.startsWith("\(")) || !(entry.endsWith("\)"))){
         validForms = false;
         return;
       }
@@ -14,12 +21,15 @@ module.exports.run = async (bot, message, args) => {
 
     if(!validForms){
       message.channel.send("Please ensure the question and each option are surrounded by " + 
-      "quotation marks \(\"\) individually");
+      "parentheses: \( and \)");
       return;
     }
+  
     let noQuotes = text.map((entry) => {
-      return entry.replace(/"/g,"");
+      entry = entry.replace(/\(/g,"");
+      return entry.replace(/\)/g,"");
     });
+
     let questions = noQuotes.slice(1).map((entry, i) => {
       let letter = String.fromCharCode(65 + i);        
       return {"name": emojis[letter] + " " + entry, "value": "\u200B", inline: true}
@@ -54,6 +64,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "poll",
-  usage: ".poll \"Question\" \"Option 1\" \"Option 2\"",
+  usage: ".poll \(Question\) \(Option 1\) \(Option 2\)",
   about: "Creates a poll with up to nine options."
 }
